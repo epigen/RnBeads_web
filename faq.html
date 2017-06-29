@@ -95,50 +95,525 @@
         </ol>
         -->
 
-         <div class="panel-group" id="accordion">
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                Collapsible Group 1</a>
-              </h4>
+        <h2>General Questions</h2>
+
+             <div class="panel-group" id="accordion_general">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_general" href="#a_ghostscript">
+                        I get an error 'cannot locate Ghostscript / gswin32c'. How can I fix this?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_ghostscript" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      The R platform uses Ghostscript for convertion of PDF files to PNG images. The error you see shows that R cannot locate the Ghostscript executable on your machine. First, make sure Ghostscript is installed. You can download it from <a href="http://www.ghostscript.com">Ghostscript's official web site</a> if necessary. After that, one solution is to add the Ghostscript's installation directory to the system path. Here we provide a brief description of steps to follow in order to achieve this on Windows operating systems:</p>
+                      <p class="a"><br />
+                      1. Open the Advanced system settings. In Windows 7, for example, it can be reached through: Control Panel &gt; System and Security &gt; System &gt; Advanced System Settings.<br />
+                      2. You see the "System Properties" dialog, open the "Advanced" tab. Click the button "Environment Variables..." to update the search path.<br />
+                      3. Locate the environment variable "Path" (it doesn't matter if it is the user or the system variables, as long as you are the user who starts R). Select it, click on Edit, and prepend the location of the Ghostscript executable, followed by a semicolon. The text you need to add is usually similar to <code>C:\Program Files\gs\gs9.15\bin;</code><br />
+                      4. After starting a new R session, Ghostscript should be accessible from R. If it still cannot be located, you need to check the corresponding environment variable. In an R session, the command <code>Sys.getenv()["R_GSCMD"]</code> shows the contents of the dedicated Ghostcript variable. If the variable does not exists or points to the wrong executable file, you can set it to the full path of the Ghostscript executable. This is achieved by editing or creating the file <code>Renviron.site</code> in the <code>etc</code> subdirectory of your R installation. Make sure the file contents includes the line <code>R_GSCMD=C:\Program Files\gs\gs9.15\bin\gswin64c.exe</code> (assuming Ghostscript is located in <code>C:\Program Files\gs\gs9.15</code> and you are using the 64-bit version of R). For more information, please check the R documentation on getting and setting environment variables.
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_general" href="#a_winzip">
+                        I receive a warning that I need to install zip on my windows machine. What can I do?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_winzip" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      In order to be able to save disk-backed RnBSet objects on Windows, Zip archive creating utility should be installed and properly configured. There are multiple ways to get Zip utility installed on your Windows system. For instance, Zip is available as a part of the Rtools distribution, which is a collection of packages for R development on Windows (<a href="http://cran.r-project.org/bin/windows/Rtools/">link</a>). For the minimal install at the "Select Components" stage of the Rtools installation choose "Custom installation" and check only the "R toolset" item below. In the "Additional Tasks" dialogue, which appears a couple of steps later, make sure that both available items for "Edit the system PATH" are checked ("Current value" and "Save version number XXX in registry"). To test the installation start the Windows terminal ("Start" > "Run" > "CMD") and try executing command "zip" in the command line. Given the installation and configuration were successful you should see the Zip version and brief usage instructions.<br />
+                      In some cases, the environment variables also need to be set in order for R to locate and use the installed zip utility. One way to do this is to create or edit the file <code>Renviron.site</code> in the <code>etc</code> subdirectory of your R installation. Make sure the file contents includes the lines:<br />
+                      <code>R_ZIPCMD=zip</code><br />
+                      <code>R_UNZIPCMD=unzip</code><br />
+                      For more information, please check the R documentation on getting and setting environment variables.
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_general" href="#a_low_resources">
+                        I am running RnBeads on a computer with limited resources. What can I do to reduce the memory consumption by RnBeads?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_low_resources" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      First, try to run RnBeads on a single core and NOT in parallel. Additionally, there are several option settings that can be used to reduce the resource requirements. These option settings apply to different (sub)modules:</p>
+                      <p class="a"><code>
+                      <span style="color:#008000"># Disable greedycut (filtering)</span><br />
+                      rnb.options("filtering.greedycut"=FALSE)<br />
+                      <span style="color:#008000"># Disable intersample variation plots (exploratory analysis)</span><br />
+                      rnb.options("exploratory.intersample"=FALSE)<br />
+                      <span style="color:#008000"># Reduce the subsampling number for estimating density plots</span><br />
+                      rnb.options("distribution.subsample"=100000)<br />
+                      <span style="color:#008000"># Disable regional methylation profiling (exploratory analysis)</span><br />
+                      rnb.options("exploratory.region.profiles"=NULL)<br />
+                      <span style="color:#008000"># Disable chromosome coverage plots (QC, sequencing data only)</span><br />
+                      rnb.options("qc.coverage.plots"=FALSE)<br />
+                      </code>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_general" href="#a_galaxy">
+                        Can I start RnBeads analysis with Galaxy on the Cloud?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_galaxy" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      Yes, you can. RnBeads has a <a href="http://toolshed.g2.bx.psu.edu/view/pavlo-lutsik/rnbeads">wrapper script</a> for integration with Galaxy, accessible from the <a href="http://toolshed.g2.bx.psu.edu/">main Galaxy Tool Shed</a> (http://toolshed.g2.bx.psu.edu/view/pavlo-lutsik/rnbeads). In order to have it running the on a custom Galaxy instance on the Amazon cloud, follow the steps provided below. <b>Warning: Following the steps results in additional costs. The exact amount depends on the selected cloud configuration and Amazon Web Services pricing at the time of usage.</b>
+                      <ol>
+                        <li>Subscribe for Amazon Web Services and establish a custom Galaxy instance on the clound using the Cloud Launch interface as described here: <a href="http://wiki.galaxyproject.org/CloudMan">wiki.galaxyproject.org/CloudMan</a></li>
+                        <li>Log in to CloudMan (it becomes accessible upon successful completion of Step 1). Give it some time to start the Galaxy instance and click the button <i>Access Galaxy</i>.</li>
+                        <li>Go to the menu item <i>User</i> and register within your Galaxy instance.</li>
+                        <li>Go back to the CloudMan interface, acess the <i>Admin</i> interface (a link on the top-right), and add an yourself as an administrator user.</li>
+                        <li>Go to the Galaxy instance and refresh the page until you get a new <i>Admin</i> menu item.</li>
+                        <li>Proceed to the Galaxy administrator interface and select the task <i>Search and browse tool sheds</i>.</li>
+                        <li>Click on <i>Galaxy main toolshed</i>, select <i>Browse for valid repositories</i> and find the wrapper <b>rnbeads</b> using the search field located at the top of the newly opened page.</li>
+                        <li>Click on the button with the wrapper name and select <i>Preview and install</i>.</li>
+                        <li>Click <i>Install to Galaxy</i> on the top-right.</li>
+                        <li>Check <i>Handle tool dependencies</i>, select the <i>Statistics</i> tool panel section and click <i>Install</i>.</li>
+                        <li>Give Galaxy some time to install the tool, then go back to the <i>Analyze Data</i> interface. <b>RnBeads</b> should become available in the Tool panel, just type <i>RnBeads</i> in the search field. Click on the tool to open its Galaxy interface.</li>
+                        <li>You can test functionality of the tool by starting a small analysis of a public data set. Select <i>Gene Expression Omnibus series</i> in the data type field and specify <i>GSE38268</i> as the GEO series. The series contains only 6 Infinium 450k samples, so the analysis should not take more than an hour. After the completion you will get a link to the analysis report, displayed directly in the data display window.</li>
+                      </ol>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_general" href="#a_assemblies">
+                        Which genome assemblies does RnBeads support? Can I include a new one?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_assemblies" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      RnBeads supports the human (hg19, hg38), mouse (mm9 and mm10) and rat (rn5) genomes. If you would like to analyze a different genome, you need to have experience with R and Bioconductor. Please follow these steps:
+                        <ol>
+                            <li>Locate the Bioconductor package that defines the genome sequence. For example, the package <a href="http://www.bioconductor.org/packages/release/data/annotation/html/BSgenome.Hsapiens.UCSC.hg19.html">BSgenome.Hsapiens.UCSC.hg19</a> contains the Homo sapiens genome.</li>
+                            <li>Download the template R script <a href="siteAnnotation.R">siteAnnotation.R</a> and take a look at the defined variables and functions. Of particular interest are the list <code>CHROMOSOMES</code> and the function <code>get.genome.data</code>.</li>
+                            <li>Execute the function <code>rnb.update.sites</code> and save the result to an object named <code>sites</code>.</li>
+                            <li>Create an R annotation package. You can use the structure of <a href="http://rnbeads.mpi-inf.mpg.de/publication/data/package/current/RnBeads.mm9_0.99.0.tar.gz">RnBeads.mm9</a> as a template.</li>
+                        </ol>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_general" href="#a_libraries">
+                        Which libraries and tools does RnBeads rely on?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_libraries" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      RnBeads utilizes many established R packages for data loading and manipulation. Examples for such include the Bioconductor packages <i>methylumi</i>, <i>minfi</i>, <i>RPMM</i>, <i>ggbio</i>, <i>GEOquery</i>, <i>GOstats</i> and others. RnBeads also includes code from the Google Code project <a href="http://code.google.com/p/bmiq/">Beta Mixture Quantile Model</a>. Parallelization is implemented using the packages <i>foreach</i> and <i>doParallel</i>. Most of the report figures are created using the <i>ggplot2</i> package. GO enrichment analysis results are visualized with the help of the <i>wordcloud</i> package. See the output of the following command for a full list of the libraries required by RnBeads:</p>
+                      <p class="a"><code>tools::dependsOnPkgs(<span style="color:#000080">"RnBeads"</span>)</code></p>
+                      <p class="a">The web service submission form uses the cross-browser tooltips library by <a href="http://www.walterzorn.de">Walter Zorn</a>. The library is distributed under the <a href="http://www.gnu.org/copyleft/lesser.html">GNU Lesser General Public License</a>
+                  </div>
+                </div>
+              </div>
+
             </div>
-            <div id="collapse1" class="panel-collapse collapse in">
-              <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-              minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-              commodo consequat.</div>
+
+        <h2>Compatibility</h2>
+
+             <div class="panel-group" id="accordion_compatibility">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_compatibility" href="#a_options_99">
+                        Why are some analysis options not recognized in RnBeads 0.99.15 and later?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_options_99" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      In RnBeads 0.99.15, we reorganized the analysis pipeline. We introduced the new modules <i>Preprocessing</i> and <i>Exploratory Analysis</i>, and renamed the modules <i>Loading</i> to <i>Import</i>, <i>Data Export</i> to <i>Tracks and Tables</i>, and <i>Annotation Inference</i> to <i>Covariate Inference</i>. As a result, we renamed some of the analysis options to match the new modules. The table below lists the renamed options.</p>
+                      <table>
+                      <thead>
+                        <tr><th>Old Option</th><th>New Option</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                            <td>loading</td><td>import</td>
+                        </tr>
+                        <tr>
+                            <td>loading.default.data.type</td><td>import.default.data.type</td>
+                        </tr>
+                        <tr>
+                            <td>loading.table.separator</td><td>import.table.separator</td>
+                        </tr>
+                        <tr>
+                            <td>loading.bed.style</td><td>import.bed.style</td>
+                        </tr>
+                        <tr>
+                            <td>loading.bed.columns</td><td>import.bed.columns</td>
+                        </tr>
+                        <tr>
+                            <td>loading.bed.frame.shift</td><td>import.bed.frame.shift</td>
+                        </tr>
+                        <tr>
+                            <td>loading.bed.test</td><td>import.bed.test</td>
+                        </tr>
+                        <tr>
+                            <td>loading.bed.test.only</td><td>import.bed.test.only</td>
+                        </tr>
+                        <tr>
+                            <td>batch</td><td>exploratory</td>
+                        </tr>
+                        <tr>
+                            <td>batch.dreduction.columns</td><td>exploratory.columns</td>
+                        </tr>
+                        <tr>
+                            <td>batch.top.dimensions</td><td>exploratory.top.dimensions</td>
+                        </tr>
+                        <tr>
+                            <td>batch.principal.components</td><td>exploratory.principal.components</td>
+                        </tr>
+                        <tr>
+                            <td>batch.correlation.columns</td><td>exploratory.columns</td>
+                        </tr>
+                        <tr>
+                            <td>batch.correlation.pvalue.threshold</td><td>exploratory.correlation.pvalue.threshold</td>
+                        </tr>
+                        <tr>
+                            <td>batch.correlation.permutations</td><td>exploratory.correlation.permutations</td>
+                        </tr>
+                        <tr>
+                            <td>batch.correlation.qc</td><td>exploratory.correlation.qc</td>
+                        </tr>
+                        <tr>
+                            <td>profiles</td><td>exploratory</td>
+                        </tr>
+                        <tr>
+                            <td>profiles.beta.distribution</td><td>exploratory.beta.distribution</td>
+                        </tr>
+                        <tr>
+                            <td>profiles.intersample</td><td>exploratory.intersample</td>
+                        </tr>
+                        <tr>
+                            <td>profiles.deviation.plots</td><td>exploratory.deviation.plots</td>
+                        </tr>
+                        <tr>
+                            <td>profiles.columns</td><td>exploratory.columns</td>
+                        </tr>
+                        <tr>
+                            <td>profiles.clustering</td><td>exploratory.clustering</td>
+                        </tr>
+                        <tr>
+                            <td>profiles.clustering.top.sites</td><td>exploratory.clustering.top.sites</td>
+                        </tr>
+                        <tr>
+                            <td>region.profiles.types</td><td>exploratory.region.profiles</td>
+                        </tr>
+                        <tr>
+                            <td>export.to.ucsc</td><td>export.to.trackhub</td>
+                        </tr>
+                      </tbody>
+                      </table>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_compatibility" href="#a_functions_99">
+                        Why are some function names not recognized in RnBeads 0.99.15 and later?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_functions_99" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      In RnBeads 0.99.15, we reorganized the analysis pipeline; as described in the answer to the previous question. As a result, we renamed some of the exported functions to match the new modules. The table below lists the renamed functions.</p>
+                      <table>
+                      <thead>
+                        <tr><th>Old Function</th><th>New Function</th></tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                            <td>rnb.execute.loading</td><td>rnb.execute.import</td>
+                        </tr>
+                        <tr>
+                            <td>rnb.execute.export</td><td>rnb.execute.tnt</td>
+                        </tr>
+                        <tr>
+                            <td>rnb.export.to.ucsc</td><td>rnb.export.to.trackhub</td>
+                        </tr>
+                        <tr>
+                            <td>rnb.run.loading</td><td>rnb.run.import</td>
+                        </tr>
+                        <tr>
+                            <td>rnb.run.batch</td><td>rnb.run.exploratory</td>
+                        </tr>
+                        <tr>
+                            <td>rnb.run.profiles</td><td>rnb.run.exploratory</td>
+                        </tr>
+                        <tr>
+                            <td>rnb.run.export</td><td>rnb.run.tnt</td>
+                        </tr>
+                      </tbody>
+                      </table>
+                  </div>
+                </div>
+              </div>
+
             </div>
-          </div>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
-                Collapsible Group 2</a>
-              </h4>
+
+        <h2>Analysis Pipeline</h2>
+
+             <div class="panel-group" id="accordion_pipeline">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_pipeline" href="#a_bed">
+                        I want to load my data using <code>bed</code> files. What formats does <b>RnBeads</b> support?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_bed" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      In principle, <b>RnBeads</b> can process any tabular file format that has exactly one row for each CpG which includes genomic coordinates (chromosome, start and end), and additionally information from which methylation levels can be deduced. For more details see the package's <a href="data/RnBeads.pdf">vignette</a>. However, there are many uncertainties and parameters that have to be taken into account when specifying the exact format of the methylation data files. We thus recommend using one of the packages presets which can be set using the <code>loading.bed.style</code> option. Here is an overview of the currently implementd presets:
+                      </p>
+                      <p class="a"><b><code>EPP</code></b><br />
+                        <code>bed</code> files in the format as output files from the Epigenome Processing Pipeline developed by Fabian M&uuml;ller and Christoph Bock A tab-separated file contains: the chromosome name, start coordinate, end coordinate, methylation value and coverage as a string ('#methylated_read/#total_reads'), some score, the strand, and additional information not taken into account by <b>RnBeads</b>. The file should not contain a header line. Coordinates are 0-based, spanning the first coordinate in a site and the first coordinate outside the site (i.e. end-start = 2 for a CpG). Here are some example lines (genome assembly mm9):
+                        <p class="a"><code>
+                            chr1    3010957 3010959 '27/27' 1000    +<br />
+                            chr1    3010971 3010973 '10/20' 500    +<br />
+                            chr1    3011025 3011027 '57/70' 814     -<br />
+                            ...<br />
+                        </p></code>
+                      </p>
+                      <p class="a"><b><code>BisSNP</code></b><br />
+                        <code>bed</code> files are assumed to have been generated by the methylation calling tool <a href="http://epigenome.usc.edu/publicationdata/bissnp2011/"><code>BisSNP</code></a>. A tab-separated file contains the chromosome name, start coordinate, end coordinate, methylation value in percent, the coverage, the strand, and additional information not taken into account by <b>RnBeads</b>. The file should contain a header line. Coordinates are 0-based, spanning the first and the last coordinate in a site (i.e. end-start = 1 for a CpG). Sites on the - strand are shifted by +1. Here are some example lines (genome assembly hg19):
+                        <p class="a"><code>
+                            track name=file_sorted.realign.recal.cpg.filtered.sort.CG.bed type=bedDetail description="CG methylation<br /> 
+                            chr1    10496   10497   79.69   64      +       10496   10497   180,60,0        0       0<br />
+                            chr1    10524   10525   90.62   64      +       10524   10525   210,0,0 0       0<br />
+                            chr1    864802  864803  58.70   46      +       864802  864803  120,120,0       0       5<br />
+                            chr1    864803  864804  50.00   4       -       864803  864804  90,150,0        1       45<br />
+                            ...
+                        </p></code>
+                      </p>
+                      <p class="a"><b><code>bismarkCov</code></b><br />
+                        <code>cov</code> files are assumed to have the format as defined by Bismark's coverage file output converted from its bedGraph output (Bismark's <code>bismark2bedGraph</code> module; see the section "Optional bedGraph output in the Bismark User Guide). A tab-separated file contains: the chromosome name, cytosine coordinate, cytosine coordinate (again), methylation value in percent, number of methylated reads and the number of unmethylated reads. The file should not contain a header line. Coordinates are 1-based. Strand information does not need to be provided, but is inferred from the coordinates: Coordinates on the - strand specify the C on the - strand (G on the + strand). Coordinates referring to cytosines not in CpG content are automatically discarded. Here are some example lines (genome assembly hg19):
+                        <p class="a"><code>
+                            ...<br />
+                            chr9    73252   73252   100     1       0<br />
+                            chr9    73253   73253   0       0       1<br />
+                            chr9    73256   73256   100     1       0<br />
+                            chr9    73260   73260   0       0       1<br />
+                            chr9    73262   73262   100     1       0<br />
+                            chr9    73269   73269   100     1       0<br />
+                            ...
+                        </p></code>
+                      </p>
+                      <p class="a"><b><code>bismarkCytosine</code></b><br />
+                        <code>bed</code> files are assumed to have the format as defined by Bismark's cytosine report output (Bismark's <code>coverage2cytosine</code> module; see the section "Optional genome-wide cytosine report output" in the Bismark User Guide). A tab-separated file contains: the chromosome name, cytosine coordinate, the strand, number of methylated reads, number of unmethylated reads, and additional information not taken into account by <b>RnBeads</b>. The file should not contain a header line. Coordinates are 1-based. Coordinates on the - strand specify the C on the - strand (G on the + strand). CpG without coverage are allowed, but not required. Here are some example lines (genome assembly hg19):
+                        <p class="a"><code>
+                            ...<br />
+                            chr22   16050097        +       0       0       CG      CGG<br />
+                            chr22   16050098        -       0       0       CG      CGA<br />
+                            chr22   16050114        +       0       0       CG      CGG<br />
+                            chr22   16050115        -       0       0       CG      CGT<br />
+                            ...<br />
+                            chr22   16115591        +       1       1       CG      CGC<br />
+                            chr22   16117938        -       0       2       CG      CGT<br />
+                            chr22   16122790        +       0       1       CG      CGC<br />
+                            ...
+                        </p></code>
+                      </p>
+                      <p class="a"><b><code>Encode</code></b><br />
+                        <code>bed</code> files are assumed to have the format as the ones that can be downloaded from UCSC's ENCODE data portal. A tab-separated file contains: the chromosome name, start coordinate, end coordinate, some identifier, read coverage, the strand, start and end coordinates again (not sure why; we discard this information), some color value, read coverage and the methylation percentage. The file should contain a header line. Coordinates are 0-based. Note that this file format is very similar but not identical to the <code>'BisSNP'</code> one. Here are some example lines (genome assembly hg19):
+                        <p class="a"><code>
+                            track name="SL1815 MspIRRBS" description="HepG2_B1__GC_" visibility=2 itemRgb="On"<br />
+                            chr1    1000170 1000171 HepG2_B1__GC_   62      +       1000170 1000171 55,255,0   62      6<br />
+                            chr1    1000190 1000191 HepG2_B1__GC_   62      +       1000190 1000191 0,255,0    62      3<br />
+                            chr1    1000191 1000192 HepG2_B1__GC_   31      -       1000191 1000192 0,255,0    31      0<br />
+                            chr1    1000198 1000199 HepG2_B1__GC_   62      +       1000198 1000199 55,255,0   62      10<br />
+                            chr1    1000199 1000200 HepG2_B1__GC_   31      -       1000199 1000200 0,255,0    31      0<br />
+                            chr1    1000206 1000207 HepG2_B1__GC_   31      -       1000206 1000207 55,255,0   31      10<br />
+                            ...
+                        </p></code>
+                      </p>
+                      </p>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_pipeline" href="#a_resources">
+                        Can I combine the methylome resources on this site with the data of my samples?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_resources" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      Yes, and it is very easy. You need to copy all data files to a single directory and to merge the sample annotation tables. Just follow the steps below.</p>
+                      <ol>
+                          <li>Create a new directory to host all data files and the generated reports. In the following steps, we use the directory <code>project</code>.</li>
+                          <li>Download the files <code>data.zip</code>, <code>samples.csv</code> and <code>analysis.xml</code> from a dataset we provide on the <a href="methylomes.php">methylome resources page</a>.</li>
+                          <li>Unzip the contents of <code>data.zip</code> to <code>project/data</code>. Copy <code>samples.csv</code> to the data directory as well. Keep the file <code>analysis.xml</code> in the parent directory <code>project</code>.</li>
+                          <li>Copy the data files of your samples also to <code>project/data</code>.</li>
+                          <li>Open and modify the file <code>samples.csv</code> by adding the information for your samples to the annotation table. This file is in comma-separated format and can be edited by any spreadsheet software, such as Microsoft Excel or LibreOffice. If you still have little experience with <b>RnBeads</b>, avoid renaming columns because this might affect the subsequent analysis steps.</li>
+                      </ol>
+                      <p>Once you have added your dataset to the downloaded one, you can start the analysis pipeline using commands similar to the ones provided below:</p> 
+                      <p class="a"><code>
+                      <span style="color:#008000"># Set the working directory</span><br />
+                      setwd(<span style="color:#000080">&quot;project&quot;</span>)<br />
+                      <br />
+                      <span style="color:#008000"># Start the analysis pipeline</span><br />
+                      library(RnBeads)<br />
+                      rnb.run.xml(<span style="color:#000080">&quot;analysis.xml&quot;</span>)<br /></code></p>
+                      <p class="a">Feel free to experiment with different analysis options by editing the file <code>analysis.xml</code> or setting them in the R session using the function <code>rnb.options()</code>.
+                      </p>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_pipeline" href="#a_options">
+                        Why are the option values reset to default when I load a saved session?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_options" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      The option values are saved and handled internally by the <b>RnBeads</b> package. Therefore, if you save your R session using the function <code>save.image()</code>, the analysis options are not stored. You can copy them to a list, and reset them upon loading, as shown in the example below:</p>
+                      <p class="a"><code>
+                      <span style="color:#008000"># Saving the current session</span><br />
+                      RnBeadsOptions &lt;- rnb.options()<br />
+                      save.image(file = <span style="color:#000080">"my.analysis.RData"</span>)<br />
+                      <br />
+                      <span style="color:#008000"># Loading a session</span><br />
+                      library(RnBeads)<br />
+                      load(<span style="color:#000080">"my.analysis.RData"</span>)<br />
+                      do.call(rnb.options, RnBeadsOptions)</code>
+                      </p>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_pipeline" href="#a_paired">
+                        How do I tell <b>RnBeads</b> to perform a paired test in the differential analysis module?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_paired" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      Suppose you have a sample annotation table like this one:</p>
+                      <table>
+                          <tr class="section">
+                              <td>sample</td>
+                              <td>individual</td>
+                              <td>diseaseState</td>
+                          </tr>
+                          <tr>
+                              <td>sample_1</td>
+                              <td>John</td>
+                              <td>normal</td>
+                          </tr>
+                          <tr>
+                              <td>sample_2</td>
+                              <td>John</td>
+                              <td>tumor</td>
+                          </tr>
+                          <tr>
+                              <td>sample_3</td>
+                              <td>Jane</td>
+                              <td>normal</td>
+                          </tr>
+                          <tr>
+                              <td>sample_4</td>
+                              <td>Jane</td>
+                              <td>tumor</td>
+                          </tr>
+                          <tr>
+                              <td>sample_5</td>
+                              <td>George</td>
+                              <td>normal</td>
+                          </tr>
+                          <tr>
+                              <td>sample_6</td>
+                              <td>George</td>
+                              <td>tumor</td>
+                          </tr>
+                      </table>
+                      <p class="a">Further suppose, you want to compare tumor vs normal but with the pairing information by the patient/individual. Then you would apply the following option setting:</p>
+                      <p class="a"><code>
+                      rnb.options("differential.comparison.columns"=c("diseaseState"),"columns.pairing"=c("diseaseState"="individual"))</code>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_pipeline" href="#a_editAnnot">
+                        Can I introduce additional sample grouping information for analysis?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_editAnnot" class="panel-collapse collapse">
+                  <div class="panel-body">
+                     After loading, you can add sample annotation information (traits) to an <code>RnBSet</code> object. Use the function <code>addPheno()</code> for this purpose. You can introduce a text string for each sample with the same designation for each group that you want to specify. The newly added column in the annotation table can then be used for grouping. You can either let <b>RnBeads</b> figure out the categories by itself, or explicitly set the corresponding group options (see <code>rnb.options()</code> for details). You can set values to <code>NA</code> for samples that you don't want to include in either of the groups.
+                     If you want to specify explicit pairwise comparisons, just use the <code>differential.comparison.columns.all.pairwise</code> option. 
+                  </div>
+                </div>
+              </div>
+
             </div>
-            <div id="collapse2" class="panel-collapse collapse">
-              <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-              minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-              commodo consequat.</div>
+
+        <h2>Reports &amp; Figures</h2>
+
+             <div class="panel-group" id="accordion_repfig">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_repfig" href="#a_rescale">
+                        Can I rescale the images in the figures?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_rescale" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      <b>RnBeads</b> typically generates thousands of images in one run of the pipeline, and their resolutions are tailored to the limited space in the HTML reports. In some cases, a high-resolution image can be viewed by clicking on the corresponding image in the report. Examples for such include the heatmaps in the report on methylation profiles, as well as the plots in the report on differential methylation. In other cases, you can use the generated PDF file underlying the plot of interest. There are links to the corresponding PDF images at the figure captions in the reports. PDF files store graphics in vector format, which allows rescaling to any size without loss of quality.
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_repfig" href="#a_background">
+                        Can I change the background color or other properties of the generated plots?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_background" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      Some of the visual properties of the images can be specified using <b>RnBeads</b> options such as <code>colors.category</code> and <code>colors.gradient</code>. See the section <i>Analysis Parameter Overview</i> of the <a href="data/RnBeads.pdf">vignette</a> for more information.</p>
+                      <p class="a"><b>RnBeads</b> utilizes the package <a href="http://had.co.nz/ggplot2/">ggplot2</a> for generating most of the figures. Therefore, many aspects of the plots can be modified by adjusting the corresponding parameters in the default visual theme. As a simple example, executing the following command before starting the analysis pipeline sets the black-and-white theme:</p>
+                      <p class="a"><code>theme_set(theme_bw())</code></p>
+                      <p class="a">Please check the documentation of <i>ggplot2</i> for a detailed description of themes. We can also recommend an online <a href="http://sape.inf.usi.ch/quick-reference/ggplot2/themes">quick reference</a> on the subject, put together by members of the Sape research group at the University of Lugano.
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
-                Collapsible Group 3</a>
-              </h4>
-            </div>
-            <div id="collapse3" class="panel-collapse collapse">
-              <div class="panel-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-              minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-              commodo consequat.</div>
-            </div>
-          </div>
-        </div>
 
     </div>
     <!-- /.container -->
