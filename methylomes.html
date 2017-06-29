@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>RnBeads</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/small-business.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/rnb_logo_145x50.png" alt="">
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="index.html">About</a>
+                    </li>
+                    <li>
+                        <a href="installation.html">Installation</a>
+                    </li>
+                    <li>
+                        <a href="tutorial.html">Tutorial</a>
+                    </li>
+                    <li>
+                        <a href="examples.html">Examples</a>
+                    </li>
+                    <li class="active">
+                        <a href="methylomes.html">Methylome Resource</a>
+                    </li>
+                    <li>
+                        <a href="references.html">References</a>
+                    </li>
+                    <li>
+                        <a href="faq.html">FAQ</a>
+                    </li>
+                    <li>
+                        <a href="webservice.html">Webservice</a>
+                    </li>
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">Methylome Resource <small>Comprehensive RnBeads analyses of large-scale reference epigenome datasets</small></h1>
+
+        <!-- 
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item">
+                <a href="index.html">Home</a>
+            </li>
+            <li class="breadcrumb-item active">Contact</li>
+        </ol>
+        -->
+
+        <div class="row">
+           <div class="col-md-12">               
+               <p>The Methylome Resource was established by applying <a href="index.php">RnBeads</a> to some of the largest public datasets that are currently available for whole genome bisulfite sequencing (WGBS), for reduced representation bisulfite sequencing (RRBS) and for the Illumina Infinium HumanMethylation450 assay. This resource provides a reference for large-scale DNA methylation analyses that can be used in complementary ways:
+               <ul>
+                <li>Researchers can browse the reports online, explore biological hypotheses and load relevant data points for visual inspection or custom data analysis into R or into other software tools. For instance, using the links from the "Tracks and Tables" reports, the tracks can be visualized in various Genome Browsers.<br />
+                <i>&#8627; To explore the Methylome Resource, please click any of the "View analysis report" links below.</i>
+                </li>
+                <li>Researchers can download the data and configuration files, add their own DNA methylation data and then run RnBeads in order to analyze their data in the context of methylome datasets that span a broad set of tissue types.<br />
+                <i>&#8627; To rerun the Methylome Resource analyses, please download the data and configuration files from the table below. Each dataset can either run in full or using a representative subset of samples to reduce runtime. A more detailed explanation on how to run these analyses is available on the <a href="faq.php">FAQ</a> page.</i>
+                </li>
+               </ul>
+               </p>
+
+               <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Resource</th>
+                        <th>Data Source</th>
+                        <th>Preprocessed Data Archive</th>
+                        <th>Sample Annotation Files</th>
+                        <th>RnBeads Configuration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="2">Genome-scale RRBS data for<br />216 tissues and cell lines</td>
+                        <td rowspan="2"><a href="http://encodeproject.org/ENCODE/downloads.html">Encode Project Website</a></td>
+                        <td rowspan="2"><a href="http://rnbeads.mpi-inf.mpg.de/publication/resource/encode/data.zip"><code>data.zip</code></a> (3 GB)</td>
+                        <td><a href="http://rnbeads.mpi-inf.mpg.de/publication/resource/encode/samples.csv"><code>samples.csv</code></a> (all samples)</td>
+                        <td rowspan="2"><a href="http://rnbeads.mpi-inf.mpg.de/publication/resource/encode/analysis.xml"><code>analysis.xml</code></a></td>
+                    </tr>
+                    <tr class="section">
+                        <td><a href="http://rnbeads.mpi-inf.mpg.de/publication/resource/encode/17/samples.csv"><code>samples.csv</code></a> (17 untreated samples)</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">Genome-wide WGBS data for<br />41 tissues and cell lines</td>
+                        <td rowspan="2"><a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE46644">Gene Expression Omnibus</a></td>
+                        <td rowspan="2"><a href="http://rnbeads.mpi-inf.mpg.de/publication/resource/ziller2013/data.zip"><code>data.zip</code></a> (11 GB)</td>
+                        <td><a href="http://rnbeads.mpi-inf.mpg.de/publication/resource/ziller2013/samples.csv"><code>samples.csv</code></a> (all 41 samples)</td>
+                        <td rowspan="2"><a href="http://rnbeads.mpi-inf.mpg.de/publication/resource/ziller2013/analysis.xml"><code>analysis.xml</code></a></td>
+                    </tr>
+                    <tr class="section">
+                        <td><a href="http://rnbeads.mpi-inf.mpg.de/publication/resource/ziller2013/samples.csv"><code>samples.csv</code></a> (10 adult primary tissues)</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2">Infinium 450k data for<br />4034 cancer and normal samples</td>
+                        <td rowspan="2"><a href="https://tcga-data.nci.nih.gov/tcga/">TCGA data portal</a></td>
+                        <td rowspan="2"><a href="http://rnbeads.mpi-inf.mpg.de/publication/resource/tcga/data.zip"><code>data.zip</code></a> (35 GB)</td>
+                        <td><a href="http://rnbeads.mpi-inf.mpg.de/publication/resource/tcga/samples.csv"><code>samples.csv</code></a> (all samples)</td>
+                        <td rowspan="2"><a href="http://rnbeads.mpi-inf.mpg.de/publication/resource/tcga/analysis.xml"><code>analysis.xml</code></a></td>
+                    </tr>
+                    <tr class="section">
+                        <td><a href="http://rnbeads.mpi-inf.mpg.de/publication/resource/tcga/40/samples.csv"><code>samples.csv</code></a> (40 samples from 10 primary tumors)</td>
+                    </tr>
+                </tbody>
+               </table>
+           </div>
+        </div>
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Resource 1: Genome-scale RRBS data for 216 tissues and cell lines</h3>
+                <p>
+                    In the context of the <a href="http://www.genome.gov/10005107">ENCODE</a> project, <a href="http://genome.cshlp.org/content/23/3/555">Varley et al.</a> established genome-scale DNA methylation maps for various tissue sample and cell lines using reduced representation bisulfite sequencing (RRBS). This <b>RnBeads</b> analysis of 216 samples shows that cells from different germ layers are clearly distinguished by their DNA methylation profiles, and it identifies characteristic loci that can be used for classifying samples according to their tissue type. Including parts or all of this dataset in custom RnBeads analyses provides a useful reference for quality control, analysis and interpretation of user-generated DNA methylation datasets.
+                </p>
+                <img class="img-responsive img-rounded" src="images/encode_pca_scatter.png" alt="">
+                <br clear="all" />
+                <a class="btn btn-primary" href="http://rnbeads.mpi-inf.mpg.de/reports/reports_ENCODE/index.html">View analysis reports</a>
+            </div>
+            <div class="col-md-6">
+                <h3>Resource 2: Genome-wide WGBS data for 41 tissues and cell lines</h3>
+                <p>
+                    <a href="http://www.nature.com/nature/journal/vaop/ncurrent/full/nature12433.html">Ziller et al.</a> recently compiled whole genome bisulfite sequencing (WGBS) data for 41 tissues and cell lines comprising data from the Roadmap Epigenomics Project and other sources. The <b>RnBeads</b> analysis identified clear grouping of samples according to tissue types. Furthermore, sample type is strongly correlated with the laboratory performing the experiment. Outliers in terms of experimental quality as well as long term cell culturing are identified. This analysis illustrates how this methylome resource can be used for identifying both technical and biological outliers in large-scale DNA methylation datasets.
+                </p>
+                <img class="img-responsive img-rounded" src="images/ziller_wgbs_cluster_heatmap.png" alt="">
+                <br clear="all" />
+                <a class="btn btn-primary" href="http://rnbeads.mpi-inf.mpg.de/reports/reports_Ziller2013_WGBS/index.html">View analysis reports</a>
+            </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Resource 3: Infinium 450k data for 4034 cancer samples</h3>
+                <p>
+                    In the context of <a href="http://cancergenome.nih.gov/">The Cancer Genome Atlas (TCGA)</a> researchers have generated a large collection of cancer methylomes using the Infinium 450k assay. While an integrative analysis of the full dataset has not been published yet, <a href="http://www.jci.org/articles/view/69740">Weisenberger</a> recently summarized and reviewed the activities that led to creating this dataset. This <b>RnBeads</b> analysis of 4034 blood, breast, intestinal and brain cancer samples provides an extensive and interactively browsable analysis of this dataset, which can be used as a starting point for more targeted investigation and hypothesis testing, but also as a reference for interpreting DNA methylation aberrations observed in other cancer cohorts.
+                </p>
+                <img class="img-responsive img-rounded" src="images/tcga_scatter_mds_study_cgis.png" alt="">
+                <br clear="all" />
+                <a class="btn btn-primary" href="http://rnbeads.mpi-inf.mpg.de/reports/reports_TCGA/index.html">View analysis reports</a>
+            </div>
+            <div class="col-md-6">
+                <h3>Resource 4: Analysis of BLUEPRINT methylomes (WGBS)</h3>
+                <p>
+                    In the context of the BLUEPRINT project, whole genome bisulfite sequencing data have been generated for 81 blood related samples. Among others primary monocyte and neutrophil cell samples from healthy donors were profiled. The <b>RnBeads</b> analysis shows similar methylomes between these two closely related cell types, but also significant DNA methylation differences enriched for important biological processes of the immune system.
+                </p>
+                <img class="img-responsive img-rounded" src="images/blueprint_differential_scatter.png" alt="">
+                <br clear="all" />
+                <a class="btn btn-primary" href="http://www.computational-epigenetics.de/compepiweb/epigenomicLandscape/analysis/RnBeads/reports_bp_wgbs_v201508excl/index.html">View analysis reports</a>
+            </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-6">
+                <h3>Resource 5: DNA methylation reprogramming in memory formation of human T cells (WGBS, NOMe-seq)</h3>
+                <p>
+                    In the context of the DEEP project, whole genome bisulfite sequencing and NOMe-seq data have been generated for multiple stages during the process of memory formation in human CD4+ T cells <a href="http://www.cell.com/immunity/abstract/S1074-7613(16)30433-2">(Durek et al., 2016)</a>. The data was anlyzed in <b>RnBeads</b>. The results show a progressive loss of DNA methylation during memory formation, particularly in putative regulatory regions of the genome. Two technologies (WGBS and NOMe-seq) were employed to assess CpG methylation levels. Overall, the agreement between both methods is high.
+                </p>
+                <img class="img-responsive img-rounded" src="images/deep_tmem_heatmap.png" alt="">
+                <br clear="all" />
+                <a class="btn btn-primary" href="http://rnbeads.mpi-inf.mpg.de/reports/reports_deep_tmem/index.html">View analysis reports</a>
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <footer class="py-5 bg-inverse">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; <a href="mailto:rnbeads@mpi-inf.mpg.de">RnBeads Development Team</a> 2017</p>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>

@@ -242,7 +242,7 @@
                 <div id="a_options_99" class="panel-collapse collapse">
                   <div class="panel-body">
                       In RnBeads 0.99.15, we reorganized the analysis pipeline. We introduced the new modules <i>Preprocessing</i> and <i>Exploratory Analysis</i>, and renamed the modules <i>Loading</i> to <i>Import</i>, <i>Data Export</i> to <i>Tracks and Tables</i>, and <i>Annotation Inference</i> to <i>Covariate Inference</i>. As a result, we renamed some of the analysis options to match the new modules. The table below lists the renamed options.</p>
-                      <table>
+                      <table class="table table-striped">
                       <thead>
                         <tr><th>Old Option</th><th>New Option</th></tr>
                       </thead>
@@ -338,7 +338,7 @@
                 <div id="a_functions_99" class="panel-collapse collapse">
                   <div class="panel-body">
                       In RnBeads 0.99.15, we reorganized the analysis pipeline; as described in the answer to the previous question. As a result, we renamed some of the exported functions to match the new modules. The table below lists the renamed functions.</p>
-                      <table>
+                      <table class="table table-striped">
                       <thead>
                         <tr><th>Old Function</th><th>New Function</th></tr>
                       </thead>
@@ -518,12 +518,15 @@
                 <div id="a_paired" class="panel-collapse collapse">
                   <div class="panel-body">
                       Suppose you have a sample annotation table like this one:</p>
-                      <table>
-                          <tr class="section">
-                              <td>sample</td>
-                              <td>individual</td>
-                              <td>diseaseState</td>
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                              <th>sample</th>
+                              <th>individual</th>
+                              <th>diseaseState</th>
                           </tr>
+                        </thead>
+                        <tbody>
                           <tr>
                               <td>sample_1</td>
                               <td>John</td>
@@ -554,6 +557,7 @@
                               <td>George</td>
                               <td>tumor</td>
                           </tr>
+                        </tbody>
                       </table>
                       <p class="a">Further suppose, you want to compare tumor vs normal but with the pairing information by the patient/individual. Then you would apply the following option setting:</p>
                       <p class="a"><code>
