@@ -1,6 +1,10 @@
 # RnBeads website
 
-The RnBeads website was created using the [Small Business](http://startbootstrap.com/template-overviews/small-business/) template from [Start Bootstrap](http://startbootstrap.com/)
+The RnBeads website is accessible under [https://epigen.github.io/RnBeads_web]
+
+It was created using the [Bootstrap](http://getbootstrap.com/) framework and the [Small Business](http://startbootstrap.com/template-overviews/small-business/) template from [Start Bootstrap](http://startbootstrap.com/).
+
+
 
 ## Creators
 
