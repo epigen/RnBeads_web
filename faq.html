@@ -202,7 +202,7 @@
                       RnBeads supports the human (hg19, hg38), mouse (mm9 and mm10) and rat (rn5) genomes. If you would like to analyze a different genome, you need to have experience with R and Bioconductor. Please follow these steps:
                         <ol>
                             <li>Locate the Bioconductor package that defines the genome sequence. For example, the package <a href="http://www.bioconductor.org/packages/release/data/annotation/html/BSgenome.Hsapiens.UCSC.hg19.html">BSgenome.Hsapiens.UCSC.hg19</a> contains the Homo sapiens genome.</li>
-                            <li>Download the template R script <a href="siteAnnotation.R">siteAnnotation.R</a> and take a look at the defined variables and functions. Of particular interest are the list <code>CHROMOSOMES</code> and the function <code>get.genome.data</code>.</li>
+                            <li>Download the template R script <a href="http://rnbeads.mpi-inf.mpg.de/publication/source/siteAnnotation.R">siteAnnotation.R</a> and take a look at the defined variables and functions. Of particular interest are the list <code>CHROMOSOMES</code> and the function <code>get.genome.data</code>.</li>
                             <li>Execute the function <code>rnb.update.sites</code> and save the result to an object named <code>sites</code>.</li>
                             <li>Create an R annotation package. You can use the structure of <a href="http://rnbeads.mpi-inf.mpg.de/publication/data/package/current/RnBeads.mm9_0.99.0.tar.gz">RnBeads.mm9</a> as a template.</li>
                         </ol>
@@ -385,7 +385,7 @@
                 </div>
                 <div id="a_bed" class="panel-collapse collapse">
                   <div class="panel-body">
-                      In principle, <b>RnBeads</b> can process any tabular file format that has exactly one row for each CpG which includes genomic coordinates (chromosome, start and end), and additionally information from which methylation levels can be deduced. For more details see the package's <a href="data/RnBeads.pdf">vignette</a>. However, there are many uncertainties and parameters that have to be taken into account when specifying the exact format of the methylation data files. We thus recommend using one of the packages presets which can be set using the <code>loading.bed.style</code> option. Here is an overview of the currently implementd presets:
+                      In principle, <b>RnBeads</b> can process any tabular file format that has exactly one row for each CpG which includes genomic coordinates (chromosome, start and end), and additionally information from which methylation levels can be deduced. For more details see the package's <a href="http://bioconductor.org/packages/release/bioc/vignettes/RnBeads/inst/doc/RnBeads.pdf">vignette</a>. However, there are many uncertainties and parameters that have to be taken into account when specifying the exact format of the methylation data files. We thus recommend using one of the packages presets which can be set using the <code>loading.bed.style</code> option. Here is an overview of the currently implementd presets:
                       </p>
                       <p class="a"><b><code>EPP</code></b><br />
                         <code>bed</code> files in the format as output files from the Epigenome Processing Pipeline developed by Fabian M&uuml;ller and Christoph Bock A tab-separated file contains: the chromosome name, start coordinate, end coordinate, methylation value and coverage as a string ('#methylated_read/#total_reads'), some score, the strand, and additional information not taken into account by <b>RnBeads</b>. The file should not contain a header line. Coordinates are 0-based, spanning the first coordinate in a site and the first coordinate outside the site (i.e. end-start = 2 for a CpG). Here are some example lines (genome assembly mm9):
@@ -465,7 +465,7 @@
                       Yes, and it is very easy. You need to copy all data files to a single directory and to merge the sample annotation tables. Just follow the steps below.</p>
                       <ol>
                           <li>Create a new directory to host all data files and the generated reports. In the following steps, we use the directory <code>project</code>.</li>
-                          <li>Download the files <code>data.zip</code>, <code>samples.csv</code> and <code>analysis.xml</code> from a dataset we provide on the <a href="methylomes.php">methylome resources page</a>.</li>
+                          <li>Download the files <code>data.zip</code>, <code>samples.csv</code> and <code>analysis.xml</code> from a dataset we provide on the <a href="methylomes.html">methylome resources page</a>.</li>
                           <li>Unzip the contents of <code>data.zip</code> to <code>project/data</code>. Copy <code>samples.csv</code> to the data directory as well. Keep the file <code>analysis.xml</code> in the parent directory <code>project</code>.</li>
                           <li>Copy the data files of your samples also to <code>project/data</code>.</li>
                           <li>Open and modify the file <code>samples.csv</code> by adding the information for your samples to the annotation table. This file is in comma-separated format and can be edited by any spreadsheet software, such as Microsoft Excel or LibreOffice. If you still have little experience with <b>RnBeads</b>, avoid renaming columns because this might affect the subsequent analysis steps.</li>
@@ -560,8 +560,11 @@
                         </tbody>
                       </table>
                       <p class="a">Further suppose, you want to compare tumor vs normal but with the pairing information by the patient/individual. Then you would apply the following option setting:</p>
-                      <p class="a"><code>
-                      rnb.options("differential.comparison.columns"=c("diseaseState"),"columns.pairing"=c("diseaseState"="individual"))</code>
+                      <pre>
+                      <code>
+                        rnb.options("differential.comparison.columns"=c("diseaseState"),"columns.pairing"=c("diseaseState"="individual")
+                      </code>
+                      </pre>
                   </div>
                 </div>
               </div>
@@ -623,6 +626,7 @@
     <!-- /.container -->
 
     <!-- Footer -->
+    <hr>
     <footer class="py-5 bg-inverse">
         <div class="container">
             <p class="m-0 text-center text-white">Copyright &copy; <a href="mailto:rnbeads@mpi-inf.mpg.de">RnBeads Development Team</a> 2017</p>

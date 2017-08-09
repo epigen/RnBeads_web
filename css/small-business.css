@@ -30,3 +30,7 @@ footer {
         padding: 15px 0;
     }
 }
+
+.row.extra-top-padding{
+   margin-top: 50px;
+}
