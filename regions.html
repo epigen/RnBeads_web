@@ -91,6 +91,17 @@
         <!-- Page Heading/Breadcrumbs -->
         <h1 class="mt-4 mb-3">Region Set Resource</h1>
 
+        <div class="row">
+            <div class="col-md-12">
+              <p>This reference stores a number of useful region set annotations to be used in <a href="index.html">RnBeads</a> analyses. You can find a list of available region sets along with their descriptions below. Here is an example showing how you can employ them in your analyses:</p>
+<pre class="pre-scrollable">
+REGION_SET <- "tiling1kb"
+ASSEMBLY <- "hg19"
+rnb.load.annotation.from.db(REGION_SET, assembly=ASSEMBLY)
+rnb.options(region.types=union(rnb.getOption("region.types"), REGION_SET))
+</pre>
+            </div>
+        </div>
 
         <div class="row">
            <div class="col-md-12">               
