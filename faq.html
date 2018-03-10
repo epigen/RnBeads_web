@@ -168,14 +168,7 @@
                 </div>
                 <div id="a_assemblies" class="panel-collapse collapse">
                   <div class="panel-body">
-                      RnBeads supports the human (hg19, hg38), mouse (mm9 and mm10) and rat (rn5) genomes. If you would like to analyze a different genome, you need to have experience with R and Bioconductor. Please follow these steps:
-                        <ol>
-                            <li>Locate the Bioconductor package that defines the genome sequence. For example, the package <a href="http://www.bioconductor.org/packages/release/data/annotation/html/BSgenome.Hsapiens.UCSC.hg19.html">BSgenome.Hsapiens.UCSC.hg19</a> contains the Homo sapiens genome.</li>
-                            <li>Download the template R script <a href="http://rnbeads.mpi-inf.mpg.de/publication/source/siteAnnotation.R">siteAnnotation.R</a> and take a look at the defined variables and functions. Of particular interest are the list <code>CHROMOSOMES</code> and the function <code>get.genome.data</code>.</li>
-                            <li>Execute the function <code>rnb.update.sites</code> and save the result to an object named <code>sites</code>.</li>
-                            <li>Create an R annotation package. You can use the structure of <a href="http://rnbeads.mpi-inf.mpg.de/publication/data/package/current/RnBeads.mm9_0.99.0.tar.gz">RnBeads.mm9</a> as a template.</li>
-                        </ol>
-                  </div>
+                      RnBeads supports the human (hg19, hg38), mouse (mm9 and mm10) and rat (rn5) genomes. If you would like to analyze a different genome, you need to create a new annotation package. Please note that this can be a daunting task if you have very little experience with R or Bioconductor. We developed a dedicated project on GitHub - <a href="https://github.com/epigen/RnBeadsAnnotationCreator">RnBeadsAnnotationCreator</a> - to assist you in adding support for a new assembly to RnBeads. RnBeadsAnnotationCreator is an R package itself. It contains routines that automatize the process of annotation package creation. Its documentation explains how RnBeads annotation packages are structured and includes a tutorial on creating an annotation package for the Zebrafish genome.
                 </div>
               </div>
               <div class="panel panel-default">
