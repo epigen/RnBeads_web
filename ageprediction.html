@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>RnBeads</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/small-business.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">
+                    <img src="images/rnb_logo_145x50.png" alt="">
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="index.html">About</a>
+                    </li>
+                    <li>
+                        <a href="installation.html">Installation</a>
+                    </li>
+                    <li>
+                        <a href="tutorial.html">Tutorials</a>
+                    </li>
+                    <li>
+                        <a href="examples.html">Examples</a>
+                    </li>
+                    <li class="dropdown active">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#">Resources
+                      <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="methylomes.html">Methylome Resource</a></li>
+                        <li><a href="regions.html">Region Sets</a></li>
+                        <li class="active"><a href="ageprediction.html">Age Prediction</a></li>
+                      </ul>
+                    </li>
+                    <li>
+                        <a href="references.html">References</a>
+                    </li>
+                    <li>
+                        <a href="faq.html">FAQ</a>
+                    </li>
+<!--                     <li>
+                        <a href="webservice.html">Webservice</a>
+                    </li> -->
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Heading/Breadcrumbs -->
+        <h1 class="mt-4 mb-3">Epigenetic Age Prediction</h1>
+
+        <div class="row">
+            <div class="col-md-12">
+              <p><a href="index.html">RnBeads'</a> age prediction module employs machine learning to infer age information from DNA methylation data. It can predict age from methylation data obtained by virtually any protocol that provides single base pair resolution methylation calls, extending previously developed methods for epigenetic age inference. In addition to Illumina's methylation array series, this is the first method to support bisulfite-sequencing assays. Here we outline the methods employed and describe the data sets that were used to infer predictors for different technologies in detail. A detailed tutorial on how to use epigenetic age prediction in <a href="index.html">RnBeads</a> can be found <a href="tutorial.html#agePredTutorial">here</a>.</p>
+				
+			<h2>Workflow</h2>
+			<h3>Model description and patametrization</h3>
+              <p>The age prediction module employs elastic net regression using the <a href="https://cran.r-project.org/web/packages/glmnet/">glmnet</a> R-package. A transformed version of the annotated age as suggested by <a href="https://genomebiology.biomedcentral.com/articles/10.1186/gb-2013-14-10-r115">Horvath et al.</a> is used as response variable to reflect different pacing in epigenetic changes in younger and older ages, while DNA methylation values at single CpGs are used as features.</p>
+
+			<h3>Pre-defined Predictors</h3>
+			<p>Since prediction accuracy increases with the number of analyzed samples, we collected methylation data from multiple, publicly available studies to provide users with a basis for annotating their own samples (see <a href="#eval">below</a>). From these data sets, we compiled training data sets and inferred age predictors using elastic net regression as described above. The resulting pre-defined predictors are available as CSV files in the <a href="index.html">RnBeads</a> package and can be directly applied to user-provided data sets.</p>
+
+			<a name="eval"></a>
+			<h2>Evaluation of pre-defined age predictors</h2>
+			<p>Predictors were trained based on data from the Illumina Infinium HumanMethylation27 BeadChip, its successor the Infinium 450 BeadChip and Reduced-Representation Bisulfite Sequencing (RRBS). Note that we did not include the Illumina MethylationEPIC BeadChip and Whole-Genome Bisulfite-Sequencing data due to the lack of large representative data sets (hundreds of age-annotated training samples are required). However, first applications of the pre-defined predictors to EPIC data showed performance consistent with what we describe here.</p>
+
+			<h3>Infinium 27k BeadChip</h3>
+			<p>The Infinium 27k BeadChip training data set comprised 2,286 sample from 6 different studies, collected from the gene expression omnibus (GEO). A detailed description of the studied can be found in the <a href="#tableDes">table</a> below. Mainly blood samples, but also colon samples are contained in the training data set, while the test data set only consists of blood samples. Applying the above workflow, we detected 366 CpG sites to be predictive of the donor’s age. Evaluation of the pre-defined predictor was based on 10-fold cross validation on the training data set and on the independent test data set. While cross validation resulted in a correlation of 0.958 and a median absolute difference (MADiff) of 3.23 years between annotated and predicted ages, performance on the test data set was 86 % correlation and MADiff 5.13.</p>
+            <img class="img-responsive img-rounded" src="images/age_predict_27k.png" alt="">
+
+			<h3>Infinium 450k BeadChip</h3>
+			<p>Similarly, the training data set consisted of 1,866 samples from 20 studies, either from GEO or TCGA, and contained ages between 0 and 103 years.  In addition to the majority of blood samples, kidney and brain tissues were included. An independent test data set comprising 1,007 mainly blood samples was used to evaluate performance of the pre-defined predictor, which selected 761 age-associated CpGs. In line with the findings for its predecessor chip, cross validation proved high predictive performance (correlation 0.95, MADiff 2.8 years) underpinned by the independent test data set (0.89 and 2.94 years).</p>
+            <img class="img-responsive img-rounded" src="images/age_predict_450k.png" alt="">
+
+			<h3>RRBS</h3>
+			<p>This data set contains blood samples from 232 individuals of German origin covering an age range of 20-103 years. No independent test data set was available due to the still limited number of bisulfite studies addressing methylation changes associated with healthy human aging. Nevertheless, the feature selection method employed by RnBeads determines 156 sites associated with the aging process and cross validation showed reasonable predictive performance (correlation 0.93, MADiff 6.37 years)</p>
+            <img class="img-responsive img-rounded" src="images/age_predict_RRBS.png" alt="">
+             <br clear="all" />
+			</div>
+		</div>
+		
+		<a name="tableDes"></a>
+		<h2>Data set description</h2>
+		<p>The table below describes the data sets used in <a href="index.html">RnBeads'</a> age prediction module both for training and testing purposes.</p>
+        <div class="row">
+           <div class="col-md-12">               
+               <table class="table table-hover">
+                 <thead>
+                   <tr>
+                     <th>Data Type</th>
+                     <th>Use</th>
+                     <th>Source</th>
+                     <th>Accession</th>
+                     <th>Size</th>
+                     <th>Tissue</th>
+                     <th>Donor characteristic</th>
+                   </tr>
+                 </thead>
+                 <tbody>
+                   <tr>
+                     <td rowspan="9" style="vertical-align:middle;">27k</td>
+                     <td rowspan="6" style="vertical-align:middle;">Training</td>
+                     <td rowspan="6" style="vertical-align:middle;">GEO</td>
+                     <td>GSE56606</td>
+                     <td>90</td>
+					 <td>CD14-cells</td>
+					 <td>diabetic</td>
+                   </tr>
+                    <tr>
+                     <td>GSE41037</td>
+                     <td>720</td>
+					 <td>blood, brain</td>
+					 <td>healthy</td>
+                   </tr>
+                   <tr>
+                     <td>GSE48988</td>
+                     <td>178</td>
+					 <td>colon</td>
+					 <td>aspirin intake</td>
+                   </tr>
+                   <tr>
+                     <td>GSE58119</td>
+                     <td>282</td>
+					 <td>blood serum</td>
+					 <td>BRCA-1 mutation</td>
+                   </tr>
+                   <tr>
+                     <td>GSE19711</td>
+                     <td>540</td>
+					 <td>whole blood</td>
+					 <td>healthy</td>
+                   </tr>
+                   <tr>
+                     <td>GSE27097</td>
+                     <td>398</td>
+					 <td>cord blood</td>
+					 <td>pediatric</td>
+                   </tr>
+                   <tr>
+                     <td><b>Training Data Set</b></td>
+                     <td></td>
+                     <td></td>
+                     <td><b>2,289</b></td>
+					 <td></td>
+					 <td></td>
+                   </tr>
+                   <tr>
+                     <td>Test</td>
+                     <td>GEO</td>
+                     <td>GSE44763</td>
+                     <td>46</td>
+					 <td>brain</td>
+					 <td>obese</td>
+                   </tr>
+                    <tr>
+                     <td><b>Test Data Set</b></td>
+                     <td></td>
+                     <td></td>
+                     <td><b>46</b></td>
+					 <td></td>
+					 <td></td>
+                   </tr>
+                   <tr>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+					 <td></td>
+					 <td></td>
+					 <td></td>
+                   </tr>
+                  <tr>
+                     <td rowspan="27" style="vertical-align:middle;">450k</td>
+                     <td rowspan="19" style="vertical-align:middle;">Training</td>
+                     <td rowspan="10" style="vertical-align:middle;">TCGA</td>
+                     <td>BRCA</td>
+                     <td>96</td>
+					 <td>breast</td>
+					 <td>breast carcinoma</td>
+                   </tr>
+                  <tr>
+                     <td>ESCA</td>
+                     <td>16</td>
+					 <td>esophagus</td>
+					 <td>esophageal carcinoma</td>
+                   </tr>
+                   <tr>
+                     <td>GBM</td>
+                     <td>1</td>
+					 <td>brain</td>
+					 <td>glioblastoma multiforme</td>
+                   </tr>
+                   <tr>
+                     <td>HNSC</td>
+                     <td>50</td>
+					 <td>head and neck</td>
+					 <td>head and neck squamous cell carcinoma</td>
+                   </tr>
+                   <tr>
+                     <td>KIRC</td>
+                     <td>160</td>
+					 <td>kidney</td>
+					 <td>kidney renal clear cell carcinoma</td>
+                   </tr>
+                   <tr>
+                     <td>LIHC</td>
+                     <td>48</td>
+					 <td>liver</td>
+					 <td>liver hepatocellular carcinoma</td>
+                   </tr>
+                   <tr>
+                     <td>LUAD</td>
+                     <td>32</td>
+					 <td>lung</td>
+					 <td>lung adenocarcinoma</td>
+                   </tr>
+                   <tr>
+                     <td>LUSC</td>
+                     <td>42</td>
+					 <td>lung</td>
+					 <td>lung squamous cell carcinoma</td>
+                   </tr>
+                   <tr>
+                     <td>PAAD</td>
+                     <td>8</td>
+					 <td>pancreas</td>
+					 <td>pancreatic adenocarcinoma</td>
+                   </tr>
+                   <tr>
+                     <td>KIRP</td>
+                     <td>45</td>
+					 <td>kidney</td>
+					 <td>kidney renal papillary cell carcinoma</td>
+                   </tr>
+                   <tr>
+                     <td rowspan="9" style="vertical-align:middle;">GEO</td>
+                     <td>GSE51057</td>
+                     <td>177</td>
+					 <td>blood</td>
+					 <td>all female</td>
+                   </tr>
+                   <tr>
+                     <td>GSE41169</td>
+                     <td>95</td>
+					 <td>brain</td>
+					 <td>aging</td>
+                   </tr>
+                   <tr>
+                     <td>GSE48472</td>
+                     <td>45</td>
+					 <td>multiple tissues (e.g. blood, hair, omentum)</td>
+					 <td></td>
+                   </tr>
+                   <tr>
+                     <td>GSE50498</td>
+                     <td>48</td>
+					 <td>skeletal muscle</td>
+					 <td>healthy</td>
+                   </tr>
+                   <tr>
+                     <td>GSE41826</td>
+                     <td>145</td>
+					 <td>brain</td>
+					 <td></td>
+                   </tr>
+                   <tr>
+                     <td>GSE30870</td>
+                     <td>40</td>
+					 <td>blood</td>
+					 <td>newborns</td>
+                   </tr>
+                   <tr>
+                     <td>GSE40360</td>
+                     <td>46</td>
+					 <td>brain</td>
+					 <td>multiple-sclerosis</td>
+                   </tr>
+                   <tr>
+                     <td>GSE40279</td>
+                     <td>656</td>
+					 <td>whole blood</td>
+					 <td></td>
+                   </tr>
+                   <tr>
+                     <td>GSE48325</td>
+                     <td>85</td>
+					 <td>liver</td>
+					 <td>non-alcoholic fatty liver</td>
+                   </tr>
+                   <tr>
+                     <td><b>Training Data Set</b></td>
+                     <td></td>
+                     <td></td>
+                     <td><b>1,866</b></td>
+					 <td></td>
+					 <td></td>
+                   </tr>
+                   <tr>
+                     <td rowspan="6" style="vertical-align:middle;">Test</td>
+                     <td rowspan="6" style="vertical-align:middle;">GEO</td>
+                     <td>GSE34639</td>
+                     <td>48</td>
+					 <td>CD4+-cells</td>
+					 <td>newborns</td>
+                   </tr>
+                   <tr>
+                     <td>GSE53841</td>
+                     <td>24</td>
+					 <td>blood</td>
+					 <td>HIV-1 infection</td>
+                   </tr>
+                   <tr>
+                     <td>GSE59457</td>
+                     <td>130</td>
+					 <td>brain</td>
+					 <td>HIV-1 infection</td>
+                   </tr>
+                   <tr>
+                     <td>GSE67751</td>
+                     <td>92</td>
+					 <td>blood</td>
+					 <td>HIV-1 infection </td>
+                   </tr>
+                   <tr>
+                     <td>GSE59505</td>
+                     <td>24</td>
+					 <td> multiple tissues (e.g semen,saliva)</td>
+					 <td></td>
+                   </tr>
+                   <tr>
+                     <td>GSE42861</td>
+                     <td>689</td>
+					 <td>blood</td>
+					 <td>rheumatoid arthritis</td>
+                   </tr>
+                   <tr>
+                     <td><b>Test Data Set</b></td>
+                     <td></td>
+                     <td></td>
+                     <td>1,007</td>
+					 <td></td>
+					 <td></td>
+                   </tr>
+                   <tr>
+                     <td></td>
+                     <td></td>
+                     <td></td>
+					 <td></td>
+					 <td></td>
+					 <td></td>
+					 <td></td>
+                   </tr>
+                   <tr>
+                     <td>RRBS</td>
+                     <td>Training</td>
+                     <td>Kiel</td>
+                     <td>NA</td>
+                     <td>232</td>
+					 <td>blood</td>
+					 <td></td>
+                   </tr>
+                 </tbody>
+               </table>
+           </div>
+        </div>
+        <!-- /.row -->
+
+
+    </div>
+    <!-- /.container -->
+
+    <!-- Footer -->
+    <hr>
+    <footer class="py-5 bg-inverse">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; <a href="mailto:rnbeads@mpi-inf.mpg.de">RnBeads Development Team</a> 2018 | <a href="https://www.mpi-inf.mpg.de/imprint">Impressum/Imprint</a></p>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+
+</body>
+
+</html>
