@@ -1,0 +1,49 @@
+# Installing RnBeads
+
+Please run the following steps to install RnBeads. Do not hesitate to contact us (<rnbeads@mpi-inf.mpg.de>) if you encounter any problems.
+
+### Install `RnBeads`
+Open an `R` session and run the following command:
+```{r eval=FALSE}
+source("http://rnbeads.mpi-inf.mpg.de/publication/source/install.R")
+```
+Note that several packages will be downloaded from the `CRAN` and `bioconductor` repositories and installation therefore can take a while.
+
+After the installation, confirm that `RnBeads` can be loaded:
+```{r eval=FALSE}
+library(RnBeads)
+```
+
+### Install Ghostscript
+Ghostscript is required for `RnBeads` plotting functionality. Please install using the instructions according to your platform.
+
+#### Windows
+1. Download ghostscript from <http://ghostscript.com/download/gsdnld.html>
+2. After installing ghostscript, we still need to tell `R` where to find ghostscript. To do so, it is necessary to set adapt your system's `Path` variable:
+  + Go to `Control Panel` &rarr; `System and Security` &rarr; `System` &rarr; `Advanced System Settings` &rarr; `computer name, domain and workgroup settings` &rarr; `Advanced` &rarr; `Environment Variables`
+  + Find the `Path` variable within `System Variables`, select it and click on `edit`.
+  + Add `C:\Program Files\gs\gs9.23\bin` (or the directory where you installed ghostscript to) to the `Path` variable. In Windows 10, you can do this by clicking on `New` and entering the path. In other Windows versions, just append the path to the variable value, seperated by a semicolon. 
+3. Restart `R`
+
+#### MacOS
+1. Download and install the `Ghostscript 9.23` package from <http://pages.uoregon.edu/koch/>
+2. Restart `R`
+
+#### Testing if `RnBeads` plotting works properly
+Start an `R` session and try the following commands.
+```{r eval=FALSE}
+library(RnBeads)
+setwd(tempdir())
+rplot <- createReportPlot("test_gs")
+plot(1:20, pch = 1:20)
+off(rplot)
+```
+
+### (Optional) Install RStudio
+We will run the tutorial code using `RStudio`. `RStudio` is an integrated development environment (IDE) for the `R` programming language and you can easily manage your `R` code and projects with it. Although it is not required for running `RnBeads` analyses, we recommond you give it a try. You can download and install it from the `RStudio` website: <https://www.rstudio.com/>
+
+
+---
+<http://rnbeads.org/>
+
+author: *Fabian Mueller* <<rnbeads@mpi-inf.mpg.de>>
