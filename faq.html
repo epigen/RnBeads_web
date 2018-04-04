@@ -287,15 +287,16 @@
                   <div class="panel-body">
                       RnBeads is a rich package, which also has a lot of dependencies. Upon RnBeads installation into a "clean" R environment, more than a hundred of other R packages will be installed. Many of them have dependencies on the operating system level, however, most of these dependencies are simultaneously defined as dependencies of R itself and will be installed together with it. There are some exceptions, though. As a rule dependencies of RnBeads will <b>require</b> the following libraries to be installed:<br /><br />
                       <ll>
-                      <li><code>libmysql</code> and <code>libmysql-devel</code>. NB. These packages are aliased as <code>mariadb</code> on RedHat-derived systems (RHEL, CentOS, Fedora)</li>
+                      <li><code>libmysql</code> and <code>libmysql-devel</code>. NB. These packages are aliased as <code>mariadb</code> on RedHat-derived Linux distributions (RHEL, CentOS, Fedora)</li>
                       <li><code>libxml2</code> and <code>libxml2-devel</code></li>
                       </ll>
                       <br />
                       Furthermore, package GLAD, used for CNV calling, will require Gnu Scientific Library, known on many Linux systems as <code>gsl</code> package.<br />
                       
-                      On the RedHat derivatives, one can install all the extra dependencies with one command:<br/>
+                      As an example, on RedHat derivatives one can install all the extra dependencies with one command:<br/>
                       <code>yum install mariadb mariadb-devel libxml2 libxml2-devel gsl</code> <br/>
-                      Note that the installation will normally require administrator a.k.a. "root" access rights. In most cases one can temporarily get them by addind <code>sudo</code> to the beginning of the above command. In case of further problems you should contact the system's administrator of your department, or simply a more experienced Linux user.
+                      Note that the installation will normally require administrator a.k.a. "root" access rights. In most cases one can temporarily get them by addind <code>sudo</code> to the beginning of the above command. <br/> The installation command might be different on other Linux distributions, so please, refer to their respective documentation and package repositories.                      
+                      In case of further problems you should contact the system's administrator of your department, or simply a more experienced Linux user.
                   </div>
                 </div>
               </div>
