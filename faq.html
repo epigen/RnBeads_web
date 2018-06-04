@@ -686,6 +686,24 @@ rnb.options("differential.comparison.columns"=c("diseaseState"),"columns.pairing
                   </div>
                 </div>
               </div>
+			<div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_repfig" href="#a_lola">
+                        Why do all LOLA enrichment plots produce "plotting error", although <code>differential.enrichment.lola=TRUE</code>?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_lola" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      <b>RnBeads</b> makes extensive use of other bioconductor- and CRAN-packages, which themselves have further dependencies. For instance, the <a href="http://bioconductor.org/packages/release/bioc/html/LOLA.html">LOLA package</a> makes use of the <a href="https://www.bioconductor.org/packages/release/bioc/html/qvalue.html">qvalue</a> package to adjust its p-values for multiple testing. This package is not loaded by default through the LOLA package, since multiple testing correction is optional. However, <b>RnBeads</b> relies on corrected p-values as thresholds and throws an error, if no corrected p-value is available. To fix this issue, manually install <a href="https://www.bioconductor.org/packages/release/bioc/html/qvalue.html">qvalue</a> and restart your analysis:
+						<p class="a"><code><br />
+										 source("https://bioconductor.org/biocLite.R")<br />
+										 biocLite("qvalue")
+						</code></p>
+                  </div>
+                </div>
+              </div>
             </div>
 
     </div>
