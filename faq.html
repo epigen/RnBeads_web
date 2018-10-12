@@ -649,6 +649,25 @@ rnb.options("differential.comparison.columns"=c("diseaseState"),"columns.pairing
                   </div>
                 </div>
               </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_pipeline" href="#a_greedycut">
+                        How does the greedycut algorithm for filtering CpGs and samples work?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_greedycut" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      In brief, the algorithm iteratively removes the CpGs or samples in the dataset that contain the largest fraction of unreliable measurements as indicated by detection p-values or read coverage.
+                      </p>
+                      Here are some mathematical details: Let A = {a_ij} be an indicator matrix in which the columns denote samples, and rows – sites. We set a_ij to 1 if the corresponding methylation measurement is unreliable, and 0 otherwise. Furthermore, let B_retained be a submatrix of A, obtained after removing some columns and/or rows, and Bremoved be the set of elements of A that were removed. Using the notation introduced above, a filtering step splits the elements of A in two groups – retained and removed, which should mirror as closely as possible the properties unreliable and reliable. We thus consider the step of removing low quality samples and/or sites (columns and rows in A, respectively) as a classification problem. For every outcome B_retained (and the removed elements B_removed), one can compute sensitivity Se and specificity Sp w.r.t. to the ground truth, i.e. unreliable and reliable. We define D to be the distance of the point (1 – Sp, Se) to the diagonal in a typical a ROC curve plot, and search for an optimal submatrix B_retained with respect to the metric D.</p>
+                      There are two hurdles to obtaining an exact solution of this problem: (1) there is not necessarily a unique matrix B_retained with a minimal value of D, and (2) the problem is NP-complete. Therefore, in mathematical terms, Greedycut is a greedy search for an optimal submatrix B_retained of a given indicator matrix A = {a_ij} with respect to a specific criterion D.
+                      </p>
+                      Further details for the design of this algorithm (finding a maximum induced indicator submatrix) and some of its properties are described in Section 3.2 of this <a href="http://dx.doi.org/10.22028/D291-26574">Ph.D. thesis</a>.
+                  </div>
+                </div>
+              </div>
 
             </div>
 
