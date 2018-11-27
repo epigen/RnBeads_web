@@ -652,6 +652,23 @@ rnb.options("differential.comparison.columns"=c("diseaseState"),"columns.pairing
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_pipeline" href="#a_tempdir">
+                        I heard that <b>RnBeads</b> stores large objects on disk rather than in main memory. Where are these objects stored? Can it happen, that temporary files accumulate on my hard drive?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_tempdir" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      Any temporary files are automatically deleted when an RnBeads analysis is completed and the corresponding R session is closed. When an R session is abnormally terminated, however, some temporary files might remain. If you suspect that your computer contains old temporary files from RnBeads analyses, lease check the contents of the directories used by R and the <code>ff</code> package for storing temporary files. Within an R session, you can see the ff temporary directory by executing the following commands:</p>
+                      <p class="a"><code>
+                      library(ff)<br />
+                      getOption("fftempdir")<br /></code></p>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion_pipeline" href="#a_greedycut">
                         How does the greedycut algorithm for filtering CpGs and samples work?
                     </a>
