@@ -746,16 +746,23 @@ rnb.options("differential.comparison.columns"=c("diseaseState"),"columns.pairing
               <div class="panel-heading">
                 <h4 class="panel-title">
                   <a data-toggle="collapse" data-parent="#accordion_technical" href="#a_tempdir">
-                      I heard that <b>RnBeads</b> stores large objects on disk rather than in main memory. Where are these objects stored? Can it happen, that temporary files accumulate on my hard drive?
+                      I heard that <b>RnBeads</b> stores large objects on disk rather than in main memory. Where are these objects stored? Can temporary files accumulate on my hard drive?
                   </a>
                 </h4>
               </div>
               <div id="a_tempdir" class="panel-collapse collapse">
                 <div class="panel-body">
-                    Any temporary files are automatically deleted when an RnBeads analysis is completed and the corresponding R session is closed. When an R session is abnormally terminated, however, some temporary files might remain. If you suspect that your computer contains old temporary files from RnBeads analyses, lease check the contents of the directories used by R and the <code>ff</code> package for storing temporary files. Within an R session, you can see the ff temporary directory by executing the following commands:</p>
-                    <p class="a"><code>
-                    library(ff)<br />
-                    getOption("fftempdir")<br /></code></p>
+                    Any temporary files are automatically deleted when an RnBeads analysis is completed and the corresponding R session is closed. Typically the temp directory can be found on the <code>/tmp/</code> path of a Linux/Unix machine. You can check where R stores your temporary data using the <code>tempdir()</code> command in an R session.  By default RnBeads also stores big datasets on the hard drive during the analysis in order to reduce memory consumption. For this task it makes implicit use of the <code>ff</code> package for storing temporary files. Within an R session, you can see the ff temporary directory by executing the following commands:</p>
+                    <p class="a"><code><br />
+                      tempdir()<br />
+                      library(ff)<br />
+                      getOption("fftempdir")
+                    </code></p>
+                    You can change where big RnBeads methylation datasets are stored on disk using
+                    <p class="a"><code><br />
+                      options(fftempdir="MY_DIRECTORY")
+                    </code></p>
+                    before running your analysis. However, if an R session is abnormally terminated, some temporary files might remain, because ff and RnBeads cannot regain control of the R sesseion to delete these files. If you suspect that your computer contains old temporary files from RnBeads analyses, check the contents of the above directories and delete them manually.
                 </div>
               </div>
             </div>
