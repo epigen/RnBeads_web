@@ -652,23 +652,6 @@ rnb.options("differential.comparison.columns"=c("diseaseState"),"columns.pairing
               <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
-                    <a data-toggle="collapse" data-parent="#accordion_pipeline" href="#a_tempdir">
-                        I heard that <b>RnBeads</b> stores large objects on disk rather than in main memory. Where are these objects stored? Can it happen, that temporary files accumulate on my hard drive?
-                    </a>
-                  </h4>
-                </div>
-                <div id="a_tempdir" class="panel-collapse collapse">
-                  <div class="panel-body">
-                      Any temporary files are automatically deleted when an RnBeads analysis is completed and the corresponding R session is closed. When an R session is abnormally terminated, however, some temporary files might remain. If you suspect that your computer contains old temporary files from RnBeads analyses, lease check the contents of the directories used by R and the <code>ff</code> package for storing temporary files. Within an R session, you can see the ff temporary directory by executing the following commands:</p>
-                      <p class="a"><code>
-                      library(ff)<br />
-                      getOption("fftempdir")<br /></code></p>
-                  </div>
-                </div>
-              </div>
-              <div class="panel panel-default">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion_pipeline" href="#a_greedycut">
                         How does the greedycut algorithm for filtering CpGs and samples work?
                     </a>
@@ -722,7 +705,7 @@ rnb.options("differential.comparison.columns"=c("diseaseState"),"columns.pairing
                   </div>
                 </div>
               </div>
-			<div class="panel panel-default">
+			        <div class="panel panel-default">
                 <div class="panel-heading">
                   <h4 class="panel-title">
                     <a data-toggle="collapse" data-parent="#accordion_repfig" href="#a_lola">
@@ -742,6 +725,41 @@ rnb.options("differential.comparison.columns"=c("diseaseState"),"columns.pairing
               </div>
             </div>
 
+      <h2>Technical Issues</h2>
+
+          <div class="panel-group" id="accordion_technical">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion_technical" href="#a_parallelmem">
+                      I noticed that my analysis requires a lot of memory when I use multiple cores. What can I do?
+                  </a>
+                </h4>
+              </div>
+              <div id="a_parallelmem" class="panel-collapse collapse">
+                <div class="panel-body">
+                    R and the <code>foreach</code> package that we use for parallelization across multiple cores have been known to create unnecessary copies of in-memory objects for each parallel task. We therefore recommend to reduce the number cores using the <code>parallel.setup()</code> function in RnBeads. For large datasets, we recommend not to use more than 2 to 4 cores and - if possible - parallelize using a high performance compute cluster (HPC; see the "Deploying RnBeads on a Scientific Compute Cluster" section in the <a href="http://bioconductor.org/packages/release/bioc/vignettes/RnBeads/inst/doc/RnBeads.pdf">RnBeads vignette</a>) rather than running the entire analysis on too many cores of a single machine.
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion_technical" href="#a_tempdir">
+                      I heard that <b>RnBeads</b> stores large objects on disk rather than in main memory. Where are these objects stored? Can it happen, that temporary files accumulate on my hard drive?
+                  </a>
+                </h4>
+              </div>
+              <div id="a_tempdir" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Any temporary files are automatically deleted when an RnBeads analysis is completed and the corresponding R session is closed. When an R session is abnormally terminated, however, some temporary files might remain. If you suspect that your computer contains old temporary files from RnBeads analyses, lease check the contents of the directories used by R and the <code>ff</code> package for storing temporary files. Within an R session, you can see the ff temporary directory by executing the following commands:</p>
+                    <p class="a"><code>
+                    library(ff)<br />
+                    getOption("fftempdir")<br /></code></p>
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
     <!-- /.container -->
 
