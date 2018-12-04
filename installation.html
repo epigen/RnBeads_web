@@ -89,11 +89,16 @@
             <div class="col-md-12">
                <p>We are happy you chose to try <b>RnBeads</b>! Installing it is very easy. In essence, all you need to do is start an R session and type the following command:</p>
                <p><code>source("http://rnbeads.mpi-inf.mpg.de/publication/source/install.R")</code></p>
-               <p>It executes the installation script we provided on this website that takes care of downloading all dependencies, as well as the <b>RnBeads</b> package itself. For generating reports and plots, please also make sure you have <a href="https://www.ghostscript.com/">Ghostscript</a> installed on your system. You can find detailed instructions on how to do this <a href="data/installing_rnbeads.html">here</a>. Be sure to check the <a href="faq.html">FAQ page</a> for questions concerning the installation or if you are unsure about certain steps of the installation.</p>
+               <p>It executes the installation script we provided on this website that takes care of downloading all dependencies, as well as the <b>RnBeads</b> package itself. For generating reports and plots, please also make sure you have <a href="https://www.ghostscript.com/">Ghostscript</a> installed on your system. You can find detailed instructions on how to do this <a href="data/installing_rnbeads.html">here</a>. The complete installation process will typically take 10 to 15 minutes; depending on the number of packages that need to be installed or updated, and on the speed of the computer and Internet connection, the installation may in rare cases take more than one hour to complete. Once the installation script has terminated, you can verify that the installation has been successful by using the following commands:
+               <p>
+                <code>library(RnBeads)</code><br />
+                <code>rnb.run.dj()</code>
+               </p>
+               This launches the RnBeads graphical user interface in a new browser window. Be sure to check the <a href="faq.html">FAQ page</a> for questions concerning the installation or if you are unsure about certain steps of the installation.</p>
 
-               <p><b>RnBeads</b> and its companion data packages are compatible with all recent R versions starting from R version 3.0.0.</p>
+               <p>We recommend that you use R version 3.14 or later with the most recent version of <b>RnBeads</b>.</p>
 
-               <p>If you are working with bisulfite sequencing data from the mouse or rat genome or the most recent human genome assembly, you need to install the corresponding data packages from bioconductor as listed below. For example, the following command installs the data package for the mouse genome assembly mm10:</p>
+               <p>If you are working with bisulfite sequencing data from the mouse or rat genome or the most recent human genome assembly, you might alsoe need to install the corresponding data packages from bioconductor as listed below, depending on which genome assembly you would like to use. For example, the following command installs the data package for the mouse genome assembly mm10:</p>
                <p>
                 <code>install.packages("BiocManager")</code><br />
 				<code>library(BiocManager)</code><br />
