@@ -1,6 +1,6 @@
 # Installing RnBeads
 
-Please run the following steps to install RnBeads. Do not hesitate to contact us (<rnbeads@mpi-inf.mpg.de>) if you encounter any problems.
+Please run the following steps to install RnBeads. Do not hesitate to contact us (<team@rnbeads.org>) if you encounter any problems.
 
 ### Install `RnBeads`
 Open an `R` session and run the following command:
@@ -46,4 +46,4 @@ We will run the tutorial code using `RStudio`. `RStudio` is an integrated develo
 ---
 <http://rnbeads.org/>
 
-author: *Fabian Mueller* <<rnbeads@mpi-inf.mpg.de>>
+author: *Fabian Mueller* <<team@rnbeads.org>>
