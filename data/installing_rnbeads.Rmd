@@ -5,7 +5,7 @@ Please run the following steps to install RnBeads. Do not hesitate to contact us
 ### Install `RnBeads`
 Open an `R` session and run the following command:
 ```{r eval=FALSE}
-source("http://rnbeads.org/materials/data/install.R")
+source("http://rnbeads.org/data/install.R")
 ```
 Note that several packages will be downloaded from the `CRAN` and `bioconductor` repositories and installation therefore can take a while.
 
