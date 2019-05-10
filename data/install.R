@@ -1,7 +1,7 @@
 ## Install RnBeads
 
 if (!requireNamespace("BiocManager", quietly = TRUE)) install.packages("BiocManager", repos="http://cran.rstudio.com")
-BiocManager::install(c("RnBeads", "RnBeads.hg19", "RnBeads.mm10"), version = "3.8", dependencies = TRUE, quiet = TRUE)
+BiocManager::install(c("RnBeads", "RnBeads.hg19", "RnBeads.mm10", "RnBeads.hg38"),  dependencies = TRUE, quiet = TRUE)
 # source("http://bioconductor.org/biocLite.R")
 # biocLite(c("RnBeads", "RnBeads.hg19", "RnBeads.mm10"), dependencies = TRUE, quiet = TRUE)
 suppressPackageStartupMessages(library(RnBeads))
