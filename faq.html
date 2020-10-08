@@ -669,6 +669,20 @@ rnb.options("differential.comparison.columns"=c("diseaseState"),"columns.pairing
                   </div>
                 </div>
               </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_pipeline" href="#a_diffmethnull">
+                        <b>RnBeads</b> shows the error message: Error in save.rnb.diffmeth(diffmeth, diffmeth.path): trying to get slot "disk.dump" from an object of a basic class ("NULL") with no slots?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_diffmethnull" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      It is likely that the grouping information that you specified to <b>RnBeads</b> is invalid, such that <b>RnBeads</b> cannot perform differential analysis. In the <b>RnBeads</b> log, there is likely a line stating: "WARNING	No valid grouping information found. NULL returned". Please validate that the column name that you specified using <code>differential.comparison.columns</code> matches the correct column in your sample annotation sheet. Additionally, please check the values for the options <code>min.group.size</code> and <code>max.group.count</code>, which specify how the accepted groups for differential analysis look.
+                  </div>
+                </div>
+              </div>
 
             </div>
 
