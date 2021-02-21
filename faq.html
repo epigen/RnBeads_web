@@ -181,6 +181,92 @@
                   </div>
                 </div>
               </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion_general" href="#a_default_options">
+                        My default RnBeads run generated slightly different results in comparison to an older version of RnBeads. What happened?
+                    </a>
+                  </h4>
+                </div>
+                <div id="a_default_options" class="panel-collapse collapse">
+                  <div class="panel-body">
+                     	<p>In order to keep up-to-date with the most recent developments in Computational Epigenomics, we continuingly update the RnBeads default option setting. In software version 2.9.3, we changed the following defaults:</p>
+					<table style="width:100%">
+					<tr>
+					 <th><b>Option name</b></th>
+					 <th><b>Old default</b></th>
+					 <th><b>New default</b></th>
+					</tr>
+					<tr>
+					 <td><code>import.bed.style</code></td>
+					 <td><code>"BisSNP"</code></td>
+					 <td><code>"bismarkCov"</code></td>
+					</tr>
+					<tr>
+					 <td><code>normalization.background.method</code></td>
+					 <td><code>"methylumi.noob"</code></td>
+					 <td><code>"none"</code></td>
+					</tr>
+					<tr>
+					 <td><code>filtering.snp</code></td>
+					 <td><code>"3"</code></td>
+					 <td><code>"any"</code></td>
+					</tr>
+					<tr>
+					 <td><code>filtering.cross.reactive</code></td>
+					 <td><code>FALSE</code></td>
+					 <td><code>TRUE</code></td>
+					</tr>
+					<tr>
+					 <td><code>filtering.sex.chromosomes.removal</code></td>
+					 <td><code>FALSE</code></td>
+					 <td><code>TRUE</code></td>
+					</tr>
+					<tr>
+					 <td><code>filtering.missing.value.quantile</code></td>
+					 <td><code>1</code></td>
+					 <td><code>0.5</code></td>
+					</tr>
+					<tr>
+					 <td><code>exploratory.intersample</code></td>
+					 <td><code>NULL</code></td>
+					 <td><code>FALSE</code></td>
+					</tr>
+					<tr>
+					 <td><code>exploratory.deviation.plots</code></td>
+					 <td><code>NULL</code></td>
+					 <td><code>FALSE</code></td>
+					</tr>
+					<tr>
+					 <td><code>exploratory.region.profiles</code></td>
+					 <td><code>NULL</code></td>
+					 <td><code>""</code></td>
+					</tr>
+					<tr>
+					 <td><code>differential.adjustment.sva</code></td>
+					 <td><code>TRUE</code></td>
+					 <td><code>FALSE</code></td>
+					</tr>
+					<tr>
+					 <td><code>differential.adjustment.celltype</code></td>
+					 <td><code>TRUE</code></td>
+					 <td><code>FALSE</code></td>
+					</tr>
+					<tr>
+					 <td><code>export.to.bed</code></td>
+					 <td><code>TRUE</code></td>
+					 <td><code>FALSE</code></td>
+					</tr>
+					<tr>
+					 <td><code>export.to.trackhub</code></td>
+					 <td><code>c("bigBed","bigWig")</code></td>
+					 <td><code>NULL</code></td>
+					</tr>
+					</table>	                  
+				 </div>
+                </div>
+              </div>
 
             </div>
 
